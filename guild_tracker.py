@@ -3,18 +3,12 @@ import datetime as dt
 import json
 import subprocess
 from pathlib import Path
-import platform  # <-- NY
 
 # === PATHS ===
 
 ROOT = Path(__file__).parent
 
-if platform.system() == "Windows":
-    # Lokalt på din egen maskine
-    RUST_BINARY = ROOT / "sf_fetcher" / "target" / "release" / "sf_fetcher.exe"
-else:
-    # På GitHub (ubuntu-latest i Actions)
-    RUST_BINARY = ROOT / "sf_fetcher" / "target" / "release" / "sf_fetcher"
+RUST_BINARY = ROOT / "sf_fetcher" / "target" / "release" / "sf_fetcher"
 
 DATA_DIR = ROOT / "data"
 CSV_PATH = DATA_DIR / "guild_levels.csv"
