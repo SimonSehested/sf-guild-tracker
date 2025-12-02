@@ -1,0 +1,10 @@
+C:\Users\Baby\Documents\GitHub\sf-guild-tracker\sf_fetcher\target\release\deps\compression_core-6b6b542fd1eb0505.d: C:\Users\Baby\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\compression-core-0.4.31\src\lib.rs C:\Users\Baby\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\compression-core-0.4.31\src\level.rs C:\Users\Baby\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\compression-core-0.4.31\src\unshared.rs C:\Users\Baby\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\compression-core-0.4.31\src\util.rs
+
+C:\Users\Baby\Documents\GitHub\sf-guild-tracker\sf_fetcher\target\release\deps\libcompression_core-6b6b542fd1eb0505.rlib: C:\Users\Baby\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\compression-core-0.4.31\src\lib.rs C:\Users\Baby\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\compression-core-0.4.31\src\level.rs C:\Users\Baby\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\compression-core-0.4.31\src\unshared.rs C:\Users\Baby\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\compression-core-0.4.31\src\util.rs
+
+C:\Users\Baby\Documents\GitHub\sf-guild-tracker\sf_fetcher\target\release\deps\libcompression_core-6b6b542fd1eb0505.rmeta: C:\Users\Baby\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\compression-core-0.4.31\src\lib.rs C:\Users\Baby\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\compression-core-0.4.31\src\level.rs C:\Users\Baby\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\compression-core-0.4.31\src\unshared.rs C:\Users\Baby\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\compression-core-0.4.31\src\util.rs
+
+C:\Users\Baby\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\compression-core-0.4.31\src\lib.rs:
+C:\Users\Baby\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\compression-core-0.4.31\src\level.rs:
+C:\Users\Baby\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\compression-core-0.4.31\src\unshared.rs:
+C:\Users\Baby\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\compression-core-0.4.31\src\util.rs:
