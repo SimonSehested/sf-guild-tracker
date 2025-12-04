@@ -78,8 +78,11 @@ def append_today(levels):
     print(f"Gemte {len(levels)} linjer i {CSV_PATH}")
 
 
-def analyze_last_n_days(n_days=3, top_n=5):
-    """Find hvem der har udviklet sig mest/mindst over de sidste n dage."""
+def analyze_last_n_days(n_days=3, top_n=10):
+    """Find hvem der har udviklet sig mest/mindst over de sidste n dage.
+
+    Inkluderer KUN spillere, der har data for ALLE datoer i vinduet.
+    """
     if not CSV_PATH.exists():
         print("Ingen CSV-fil endnu – ingen analyse.")
         return
@@ -98,8 +101,9 @@ def analyze_last_n_days(n_days=3, top_n=5):
         print("Mindre end 2 dage med data – ikke så meget at analysere endnu.")
         return
 
-    window_dates = dates[-n_days:]  # sidste n dage (eller færre, hvis der ikke er så mange)
-    print(f"\nAnalyserer udvikling over disse datoer: {', '.join(window_dates)}")
+    # Sidste n_days datoer (eller færre, hvis der ikke er så mange endnu)
+    window_dates = dates[-n_days:]
+    print(f"\nAnalyserer udvikling over disse datoer ({len(window_dates)} dage): {', '.join(window_dates)}")
 
     # (date, name) -> level
     levels_by_key = {}
@@ -118,21 +122,20 @@ def analyze_last_n_days(n_days=3, top_n=5):
 
     changes = []
     for name in players:
-        # Saml levels i kronologisk rækkefølge for de udvalgte datoer
+        # Saml levels i kronologisk rækkefølge for alle datoer i vinduet
         levels_for_player = [
-            (d, levels_by_key.get((d, name)))
+            levels_by_key.get((d, name))
             for d in window_dates
         ]
 
-        # Første dag hvor vi har et level
-        oldest_level = next((lvl for (_d, lvl) in levels_for_player if lvl is not None), None)
-        # Sidste dag hvor vi har et level
-        newest_level = next((lvl for (_d, lvl) in reversed(levels_for_player) if lvl is not None), None)
-
-        if oldest_level is None or newest_level is None:
+        # Krav: spilleren skal have data for ALLE datoer i vinduet
+        if any(lvl is None for lvl in levels_for_player):
             continue
 
+        oldest_level = levels_for_player[0]
+        newest_level = levels_for_player[-1]
         delta = newest_level - oldest_level
+
         changes.append({
             "name": name,
             "from": oldest_level,
@@ -150,11 +153,11 @@ def analyze_last_n_days(n_days=3, top_n=5):
     worst = changes_sorted[:top_n]
     best = list(reversed(changes_sorted))[:top_n]
 
-    print(f"\n=== Mindst udvikling over de sidste {len(window_dates)} dage ===")
+    print(f"\n=== Mindst udvikling over de sidste {len(window_dates)} dage (top {len(worst)}) ===")
     for c in worst:
         print(f"{c['name']}: {c['from']} → {c['to']} (Δ {c['delta']})")
 
-    print(f"\n=== Mest udvikling over de sidste {len(window_dates)} dage ===")
+    print(f"\n=== Mest udvikling over de sidste {len(window_dates)} dage (top {len(best)}) ===")
     for c in best:
         print(f"{c['name']}: {c['from']} → {c['to']} (Δ {c['delta']})")
 
@@ -168,7 +171,12 @@ def main():
         return
 
     append_today(levels)
-    analyze_last_n_days(n_days=3, top_n=5)
+
+    # 3-dages analyse
+    analyze_last_n_days(n_days=3, top_n=10)
+
+    # 7-dages analyse
+    analyze_last_n_days(n_days=7, top_n=10)
 
 
 if __name__ == "__main__":
