@@ -84,7 +84,7 @@ def analyze_last_n_days(n_days, top_n):
     Inkluderer KUN spillere, der har data for ALLE datoer i vinduet.
     """
     if not CSV_PATH.exists():
-        print("Ingen CSV-fil endnu – ingen analyse.")
+        print("Ingen CSV-fil endnu - ingen analyse.")
         return
 
     with CSV_PATH.open(newline="", encoding="utf-8") as f:
@@ -92,13 +92,13 @@ def analyze_last_n_days(n_days, top_n):
         rows = list(reader)
 
     if not rows:
-        print("CSV er tom – ingen analyse.")
+        print("CSV er tom - ingen analyse.")
         return
 
     # Find unikke datoer
     dates = sorted({row["date"] for row in rows})
     if len(dates) < 2:
-        print("Mindre end 2 dage med data – ikke så meget at analysere endnu.")
+        print("Mindre end 2 dage med data - ikke så meget at analysere endnu.")
         return
 
     # Sidste n_days datoer (eller færre, hvis der ikke er så mange endnu)
@@ -168,7 +168,7 @@ def project_levels_next_7_days(top_n=10):
     Inkluderer KUN spillere, der har data for ALLE 7 datoer i vinduet.
     """
     if not CSV_PATH.exists():
-        print("Ingen CSV-fil endnu – ingen projektion.")
+        print("Ingen CSV-fil endnu - ingen projektion.")
         return
 
     with CSV_PATH.open(newline="", encoding="utf-8") as f:
@@ -176,18 +176,18 @@ def project_levels_next_7_days(top_n=10):
         rows = list(reader)
 
     if not rows:
-        print("CSV er tom – ingen projektion.")
+        print("CSV er tom - ingen projektion.")
         return
 
     # Find unikke datoer
     dates = sorted({row["date"] for row in rows})
     if len(dates) < 7:
-        print("Mindre end 7 dages data – kan ikke lave 7-dages projektion endnu.")
+        print("Mindre end 7 dages data - kan ikke lave 7-dages projektion endnu.")
         return
 
     # Sidste 7 datoer
     window_dates = dates[-7:]
-    print(f"\nProjekterer level om 7 dage ud fra disse datoer: {', '.join(window_dates)}")
+    print(f"\nProjekteret level om 7 dage")
 
     # (date, name) -> level
     levels_by_key = {}
@@ -231,19 +231,20 @@ def project_levels_next_7_days(top_n=10):
         })
 
     if not projections:
-        print("Ingen spillere med komplette 7-dages data – ingen projektion.")
+        print("Ingen spillere med komplette 7-dages data - ingen projektion.")
         return
 
-    # Sortér efter projektionsniveau (højeste først)
-    projections_sorted = sorted(projections, key=lambda p: p["projected"], reverse=True)
+    # Sortér efter projektionsniveau (laveste først)
+    projections_sorted = sorted(projections, key=lambda p: p["projected"])
 
-    top = projections_sorted[:top_n]
+    worst = projections_sorted[:top_n]
 
-    print(f"\n=== Projekteret level om 7 dage (top {len(top)}) ===")
-    for p in top:
+    print(f"\n=== Projekteret level om 7 dage - de {len(worst)} dårligste ===")
+    for p in worst:
         print(
-            f"{p['name']}: {p['current']} nu, Δ sidste 7 dage = {p['delta']}, "
-            f"projiceret om 7 dage: {p['projected']}"
+            f"{p['name']}:"
+            f"projiceret om 7 dage: {p['projected']},"
+            f"nuværende level: {p['current']}"
         )
 
 def main():
