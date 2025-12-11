@@ -191,7 +191,6 @@ def analyze_last_n_days(n_days, top_n):
     print("=" * 60)
     print(f"ANALYSE: Udvikling over de sidste {len(window_dates)} dage")
     print("=" * 60)
-    print(f"Datoer: {', '.join(window_dates)}")
 
     levels_by_key = _build_levels_by_key(rows, window_dates)
 
@@ -278,7 +277,6 @@ def project_levels_next_7_days(top_n=10):
     print("=" * 60)
     print("PROJEKTION: Forventet level om 7 dage")
     print("=" * 60)
-    print(f"Grundlag: Udvikling over disse datoer: {', '.join(window_dates)}")
 
     levels_by_key = _build_levels_by_key(rows, window_dates)
 
